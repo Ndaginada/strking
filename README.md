@@ -1,5 +1,5 @@
 # strking-ui
-> A vue project.
+> Strking vue project.
 
 ## Development
 
