@@ -1,5 +1,5 @@
 # strking-ui
-> 初学Vue 试做移动app.
+> 初学Vue 试着做一个移动app的界面 :P.
 
 ## Development
 
