@@ -1,5 +1,5 @@
 # strking-ui
-> Strking vue project.
+> 初学Vue 试做移动app.
 
 ## Development
 
