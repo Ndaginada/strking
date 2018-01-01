@@ -1,5 +1,6 @@
 # strking-ui
 > 初学Vue 试着做一个移动app的界面 :P
+> 在devlop分支开发
 
 ## Development
 
