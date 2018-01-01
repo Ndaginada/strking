@@ -1,5 +1,5 @@
 # strking-ui
-> 初学Vue 试着做一个移动app的界面  名字叫做strking  :P
+> 初学Vue 试着做一个移动app的界面  名字叫做strking →_→
 
 > 在devlop分支开发
 
