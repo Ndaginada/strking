@@ -3,10 +3,10 @@
         <div class="logo">
             <img src="../images/LOGO.png">
         </div>
-        <mt-cell icon="back" title="用户名 :" style="border: 1px solid  rgb(113,200,255); border-radius:.50rem;margin-top: 1.2rem;">
+        <mt-cell icon="back" title="用户名 :" class="input">
             <mt-field placeholder="请输入用户名" v-model="loginForm.username"></mt-field>
         </mt-cell>
-        <mt-cell icon="back" title="密码 :" style="border: 1px solid  rgb(113,200,255); border-radius:.50rem;margin-top: 1.2rem;">
+        <mt-cell icon="back" title="密码 :" class="input">
             <mt-field placeholder="请输入密码" type="password" v-model="loginForm.password"></mt-field>
         </mt-cell>
         <div class="login-btn">
@@ -30,14 +30,12 @@
                 loginForm: {
                     username: '',
                     password: '',
-                },
-                clearEye: true,
-                remember: true,
+                }
             };
         },
         methods: {
             checkUser() {
-                if (this.loginForm.username === '') {
+                if (this.loginForm.username == '' || this.loginForm.password == '') {
                     this.Indicator.close();
                     this.Toast({
                         message: '用户名密码不能为空',
@@ -56,9 +54,10 @@
                             console.log("ok")
                         }
                     }).catch((err) => {
+                        this.$router.push({path:'/home'});
                         this.Indicator.close();
                         this.Toast({
-                            message: '登录失败',
+                            message: '网络错误',
                             position: 'bottom',
                             duration: 3500
                         });
