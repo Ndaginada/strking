@@ -17,8 +17,11 @@ Vue.component(SwipeItem.name, SwipeItem);
 Vue.component(Tabbar.name, Tabbar);
 Vue.component(TabItem.name, TabItem);
 
-new Vue({ // eslint-disable-line
+let theVue = new Vue({ // eslint-disable-line
     el: '#app',
     router,
     render: h => h(App)
 });
+
+//全局改变vue
+window.GloableVue = theVue;

@@ -31,13 +31,13 @@
 
             <!--我的-->
             <mt-tab-container-item id="我的">
-                <h1>我的</h1>
+                <h1>{{me}}</h1>
             </mt-tab-container-item>
         </mt-tab-container>
 
         <mt-tabbar v-model="selected">
             <mt-tab-item id="主页">
-                <img v-if="selected==='主页'" slot="icon" src="../images/home_active.png" >
+                <img v-if="selected==='主页'" slot="icon" src="../images/home_active.png">
                 <img v-else slot="icon" src="../images/home.png">
                 主页
             </mt-tab-item>
@@ -62,15 +62,23 @@
 </template>
 
 <script>
+    import {test_token} from "../api/home"
+
     export default {
         name: 'Home',
-        data(){
+        data() {
             return {
-                selected: '主页'
+                selected: '主页',
+                me: ''
             };
         },
-        methods:{
+        methods: {
 
+        },
+        mounted(){
+//            test_token().then(res=>{
+//                this.me = res.data;
+//            })
         }
     };
 </script>

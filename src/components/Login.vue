@@ -20,8 +20,8 @@
 </template>
 
 <script>
-    import {login} from "../api/login";
-
+    import {auth_login} from "../api/auth";
+    import RespStatus from "../api/base/RespStatus"
 
     export default {
         name: 'Login',
@@ -48,13 +48,26 @@
                         text: '登录中...',
                         spinnerType: 'triple-bounces'
                     });
-                    login(this.loginForm.username, this.loginForm.username).then(res => {
-                        console.log(res);
-                        if (res.data.code === 1) {
-                            console.log("ok")
+                    auth_login(this.loginForm.username, this.loginForm.password).then(res => {
+
+                        if (res.data.code === RespStatus.OK.code) {
+                            //获取token，存储在localStorage
+                            var token = res.data.data.token_type + ' ' + res.data.data.access_token;
+                            console.log(token);
+                            window.localStorage.setItem("token",token);
+
+                            this.$router.push({path:'/home'});
+                            this.Indicator.close();
+                        }
+                        if (res.data.code === RespStatus.BAD_USER.code) {
+                            this.Indicator.close();
+                            this.Toast({
+                                message: '用户名密码错误',
+                                position: 'bottom',
+                                duration: 3500
+                            });
                         }
                     }).catch((err) => {
-                        this.$router.push({path:'/home'});
                         this.Indicator.close();
                         this.Toast({
                             message: '网络错误',
