@@ -54,7 +54,7 @@
                             //获取token，存储在localStorage
                             var token = res.data.data.token_type + ' ' + res.data.data.access_token;
                             console.log(token);
-                            window.localStorage.setItem("token",token);
+                            window.localStorage.setItem("strking_token",token);
 
                             this.$router.push({path:'/home'});
                             this.Indicator.close();

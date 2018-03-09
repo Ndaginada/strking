@@ -7,7 +7,7 @@ import myhttp from "./base/myhttp"
  * @param passWord
  */
 function auth_login(userName, passWord) {
-    var clientId = '098f6bcd4621d373cade4e832627b4f6';
+    const clientId = '098f6bcd4621d373cade4e832627b4f6';
     return myhttp({
 
         url:"oauth/token",

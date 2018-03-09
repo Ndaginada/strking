@@ -2,17 +2,20 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Login from '@/components/Login'
 import Register from '@/components/Register'
-import Home from '@/components/Home'
+import HomePage from '@/components/HomePage'
 import NotFoundComponent from '@/components/NotFoundComponent'
+import ArticleDetail from '@/components/home/ArticleDetail'
+import ArticleIndex from '@/components/home/ArticleIndex'
 Vue.use(Router);
 
 const router = new Router({
     mode: 'history',
     routes: [
+        // {
+        //     path: '*',
+        //     component: NotFoundComponent
+        // },
         {
-            path: '*',
-            component: NotFoundComponent
-        }, {
             path: '/',
             name: 'Login',
             component: Login
@@ -26,8 +29,16 @@ const router = new Router({
             component: Register
         }, {
             path: '/home',
-            name: 'Home',
-            component: Home,
+            name: 'HomePage',
+            component: HomePage,
+            meta: {
+                requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+            },
+        },
+        {
+            path: "/articlDetail",
+            name: 'ArticleDetail',
+            component: ArticleDetail,
             meta: {
                 requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
             }
@@ -36,7 +47,7 @@ const router = new Router({
 });
 router.beforeEach((to, from, next) => {
     if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
-        const token = window.localStorage.getItem("token");
+        const token = window.localStorage.getItem("strking_token");
         console.log(token);
         if (token) {
             next();

@@ -4,7 +4,20 @@ import MintUI from "mint-ui";
 import 'mint-ui/lib/style.css';
 import router from './router' // 路由
 
-import {Field,Indicator,Toast,Cell,Swipe,SwipeItem,Tabbar, TabItem} from 'mint-ui';
+import {
+    Field,
+    Indicator,
+    Toast,
+    Cell,
+    Swipe,
+    SwipeItem,
+    Tabbar,
+    TabItem,
+    MessageBox,
+    Loadmore,
+    InfiniteScroll,
+    Lazyload
+} from 'mint-ui';
 
 Vue.use(MintUI);
 Vue.prototype.Indicator = Indicator;
@@ -16,6 +29,9 @@ Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 Vue.component(Tabbar.name, Tabbar);
 Vue.component(TabItem.name, TabItem);
+Vue.component(Loadmore.name, Loadmore);
+Vue.use(InfiniteScroll);
+Vue.use(Lazyload);
 
 let theVue = new Vue({ // eslint-disable-line
     el: '#app',
