@@ -53,9 +53,10 @@
                         if (res.data.code === RespStatus.OK.code) {
                             //获取token，存储在localStorage
                             var token = res.data.data.token_type + ' ' + res.data.data.access_token;
+                            var user_id = res.data.data.user_id;
                             console.log(token);
                             window.localStorage.setItem("strking_token",token);
-
+                            window.localStorage.setItem("strking_user_id",user_id);
                             this.$router.push({path:'/home'});
                             this.Indicator.close();
                         }

@@ -5,17 +5,17 @@ import Register from '@/components/Register'
 import HomePage from '@/components/HomePage'
 import NotFoundComponent from '@/components/NotFoundComponent'
 import ArticleDetail from '@/components/home/ArticleDetail'
+import Me_ChangeInfo from '@/components/home/Me_ChangeInfo'
 import ArticleIndex from '@/components/home/ArticleIndex'
 Vue.use(Router);
 
 const router = new Router({
     mode: 'history',
     routes: [
-        // {
-        //     path: '*',
-        //     component: NotFoundComponent
-        // },
         {
+            path: '*',
+            component: NotFoundComponent
+        }, {
             path: '/',
             name: 'Login',
             component: Login
@@ -34,11 +34,17 @@ const router = new Router({
             meta: {
                 requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
             },
-        },
-        {
+        }, {
             path: "/articlDetail",
             name: 'ArticleDetail',
             component: ArticleDetail,
+            meta: {
+                requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+            }
+        }, {
+            path: "/changeInfo",
+            name: 'Me_ChangeInfo',
+            component: Me_ChangeInfo,
             meta: {
                 requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
             }

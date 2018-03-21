@@ -23,6 +23,7 @@
     "axios": "^0.17.1",
     "babel-polyfill": "*",
     "cooking-vue2": "*",
+    "element-ui": "^2.2.2",
     "mint-ui": "^2.2.13",
     "vue": "^2.0.1",
     "vue-router": "latest",

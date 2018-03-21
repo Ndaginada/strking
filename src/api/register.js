@@ -1,13 +1,16 @@
 import myhttp from "./base/myhttp";
 
-function register() {
+function register(username,password,email,introduce) {
     return myhttp({
-        url:"oauth/token",
-        method:"POST",
+        url: "oauth/register_normal",
+        method: "POST",
         data: {
-            clientId,
-            userName,
-            passWord
+            username,
+            password,
+            email,
+            introduce
         }
     })
 }
+
+export {register}

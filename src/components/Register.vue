@@ -13,19 +13,13 @@
                 <hr/>
                 <mt-field label="密码" placeholder="请输入密码" type="password" v-model="RegisterForm.password"></mt-field>
                 <hr/>
-                <!--<mt-cell title="邮箱 :">-->
-                    <!--<label>-->
-                        <!--<input type="email"  />-->
-                    <!--</label>-->
-                <!--</mt-cell>-->
                 <mt-field v-if="email_check_state" label="邮箱" placeholder="请输入邮箱" type="email" v-model="RegisterForm.email" @blur.native.capture="inputCheck" state="success"></mt-field>
                 <mt-field v-if="!email_check_state" label="邮箱" placeholder="请输入邮箱" type="email" v-model="RegisterForm.email" @blur.native.capture="inputCheck" state="warning"></mt-field>
                 <hr/>
-                <!--<mt-field label="手机号" placeholder="请输入手机号(选填)" type="tel" v-model="RegisterForm.tel"></mt-field>-->
-                <!--<hr/>-->
                 <mt-field label="自我介绍" placeholder="自我介绍" type="textarea" rows="3"
-                          v-model="RegisterForm.intro"></mt-field>
+                          v-model="RegisterForm.introduce"></mt-field>
                 <hr/>
+
             </form>
         </div>
         <div class="sub-btn">
@@ -40,6 +34,8 @@
     import MtCell from "../../node_modules/mint-ui/packages/cell/src/cell.vue";
 
     import { MessageBox } from 'mint-ui';
+    import {register} from '../api/register'
+    import RespStatus from "../api/base/RespStatus"
 
     export default {
         components: {MtCell},
@@ -50,7 +46,7 @@
                     username: '',
                     password: '',
                     email: '',
-                    intro: ''
+                    introduce: ''
                 },
                 email_check_state:false,
             }
@@ -94,11 +90,32 @@
                     MessageBox.alert('邮箱格式错误');
                     return false;
                 }
-
+                if (this.RegisterForm.introduce.length > 30){
+                    MessageBox.alert('简介太长了。。。');
+                }
                 //注册api调用
-
+                register(this.RegisterForm.username,this.RegisterForm.password,this.RegisterForm.email,this.RegisterForm.introduce).then(
+                    res=>{
+                        console.log(res);
+                        if (res.data.code == RespStatus.OK.code){
+                            MessageBox.alert('注册成功!').then(()=>{
+                                this.$router.push({path:'/login'});
+                            });
+                        }
+                        if (res.data.code == RespStatus.BAD_REQUEST.code) {
+                            MessageBox.alert('用户名已存在!')
+                        }
+                    }
+                ).catch((err) => {
+                    this.Toast({
+                        message: '网络错误',
+                        position: 'bottom',
+                        duration: 3500
+                    });
+                    console.log(err)
+                })
             }
-        },
+        }
     };
 
 

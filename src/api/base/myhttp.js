@@ -10,7 +10,7 @@ const myhttp = axios.create({
 //统一在请求头中加 Authorization
 myhttp.interceptors.request.use(
     config => {
-        const token = window.localStorage.getItem("token");
+        const token = window.localStorage.getItem("strking_token");
         if(token){
             config.headers['Authorization'] = token;
         }

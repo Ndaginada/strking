@@ -17,6 +17,7 @@
         <div v-for="n in 10" class="article">
             <div v-on:click="toArticleDetail(articl_id)">
                 <img src="../../images/code_1.jpg" class="article_img"/>
+
                 <div class="article_font">ipho0ne X测评：用真正黑科技革新未来{{n}}</div>
             </div>
         </div>
@@ -34,6 +35,11 @@
         methods: {
             toArticleDetail(articl_id) {
                 this.$router.push({name: "ArticleDetail"})
+            },
+            loadTop() {
+                // 加载更多数据   TODO
+
+                this.$refs.loadmore.onTopLoaded();
             }
         }
     }
