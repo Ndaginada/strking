@@ -92,6 +92,7 @@
                 }
                 if (this.RegisterForm.introduce.length > 30){
                     MessageBox.alert('简介太长了。。。');
+                    return false;
                 }
                 //注册api调用
                 register(this.RegisterForm.username,this.RegisterForm.password,this.RegisterForm.email,this.RegisterForm.introduce).then(

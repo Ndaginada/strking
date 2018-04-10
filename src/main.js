@@ -19,7 +19,9 @@ import {
     Lazyload,
     CellSwipe,
     Badge,
-    Spinner
+    Spinner,
+    TabContainer,
+    TabContainerItem
 } from 'mint-ui';
 
 import 'element-ui/lib/theme-chalk/index.css';
@@ -41,6 +43,8 @@ Vue.component(Loadmore.name, Loadmore);
 Vue.component(CellSwipe.name, CellSwipe);
 Vue.component(Badge.name, Badge);
 Vue.component(Spinner.name, Spinner);
+Vue.component(TabContainer.name, TabContainer);
+Vue.component(TabContainerItem.name, TabContainerItem);
 Vue.use(InfiniteScroll);
 Vue.use(Lazyload);
 

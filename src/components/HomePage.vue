@@ -9,14 +9,14 @@
             <mt-tab-container-item id="主页">
                 <article_index></article_index>
             </mt-tab-container-item>
-            <!--消息-->
-            <mt-tab-container-item id="关注">
-                <h1>关注</h1>
+            <!--发布-->
+            <mt-tab-container-item id="发布">
+                <release></release>
             </mt-tab-container-item>
 
-            <!--商城-->
-            <mt-tab-container-item id="发现">
-                <h1>发现</h1>
+            <!--推荐-->
+            <mt-tab-container-item id="推荐">
+                <recommend></recommend>
             </mt-tab-container-item>
 
             <!--我的-->
@@ -33,15 +33,15 @@
                 <img v-else slot="icon" src="../images/home.png">
                 主页
             </mt-tab-item>
-            <mt-tab-item id="关注">
-                <img v-if="selected==='关注'" slot="icon" src="../images/message_active.png">
+            <mt-tab-item id="发布">
+                <img v-if="selected==='发布'" slot="icon" src="../images/message_active.png">
                 <img v-else slot="icon" src="../images/message.png">
-                关注
+                发布
             </mt-tab-item>
-            <mt-tab-item id="发现">
-                <img v-if="selected==='发现'" slot="icon" src="../images/cart_active.png">
+            <mt-tab-item id="推荐">
+                <img v-if="selected==='推荐'" slot="icon" src="../images/cart_active.png">
                 <img v-else slot="icon" src="../images/cart.png">
-                发现
+                推荐
             </mt-tab-item>
             <mt-tab-item id="我的">
                 <img v-if="selected==='我的'" slot="icon" src="../images/me_active.png">
@@ -56,6 +56,8 @@
 <script>
     import {test_token} from "../api/home"
     import article_index from "./home/ArticleIndex.vue"
+    import recommend from "./home/Recommend.vue"
+    import release from "./home/Release.vue"
     import me from "./home/Me.vue"
     export default {
         name: 'Home',
@@ -70,11 +72,14 @@
         },
         components:{
             article_index,
-            me
+            release,
+            me,
+            recommend,
         },
         mounted(){
 
             const selected = this.$route.query.selected;
+            console.log(selected);
             if (selected != null){
                 this.selected = selected;
             }

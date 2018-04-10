@@ -6,6 +6,7 @@ import HomePage from '@/components/HomePage'
 import NotFoundComponent from '@/components/NotFoundComponent'
 import ArticleDetail from '@/components/home/ArticleDetail'
 import Me_ChangeInfo from '@/components/home/Me_ChangeInfo'
+import Me_ChangePass from '@/components/home/Me_ChangePass'
 import ArticleIndex from '@/components/home/ArticleIndex'
 Vue.use(Router);
 
@@ -48,7 +49,15 @@ const router = new Router({
             meta: {
                 requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
             }
+        }, {
+            path: "/changePass",
+            name: 'Me_ChangePass',
+            component: Me_ChangePass,
+            meta: {
+                requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+            }
         }
+
     ]
 });
 router.beforeEach((to, from, next) => {

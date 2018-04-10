@@ -24,4 +24,17 @@ function changeInfo(username,email,icon,introduce) {
         }
     })
 }
-export {userInfo,changeInfo}
+
+function changePass(oldPassword,newPassword) {
+    const sid = window.localStorage.getItem("strking_user_id");
+    return myhttp({
+        url:"microservice-provider-user/changePass",
+        method:"POST",
+        data:{
+            sid,
+            oldPassword,
+            newPassword
+        }
+    })
+}
+export {userInfo,changeInfo,changePass}
