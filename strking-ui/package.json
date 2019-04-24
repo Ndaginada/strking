@@ -1,0 +1,39 @@
+{
+  "name": "strking-ui",
+  "version": "0.0.0",
+  "description": "A vue project.",
+  "private": true,
+  "keywords": [],
+  "scripts": {
+    "dev": "cooking watch -p",
+    "dist": "cooking build -p",
+    "deploy": "cooking build --no-color"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ndaginada/strking-vue.git"
+  },
+  "homepage": "https://github.com/Ndaginada/strking-vue.git#readme",
+  "bugs": {
+    "url": "https://github.com/Ndaginada/strking-vue.git/issues"
+  },
+  "author": "kkai",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "babel-polyfill": "*",
+    "cooking-vue2": "*",
+    "element-ui": "^2.2.2",
+    "mint-ui": "^2.2.13",
+    "vue": "^2.0.1",
+    "vue-router": "latest",
+    "vue-template-compiler": "^2.5.10"
+  },
+  "devDependencies": {
+    "babel-polyfill": "*",
+    "mint-ui": "^2.2.13",
+    "vue-template-compiler": "^2.5.10",
+    "cooking-vue2": "*",
+    "vue": "^2.0.1"
+  }
+}

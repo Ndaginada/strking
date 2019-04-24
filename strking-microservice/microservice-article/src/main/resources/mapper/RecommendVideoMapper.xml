@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mapper.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kkai.mapper.RecommendVideoMapper">
+
+
+    <insert id="addRecommendVideo">
+        INSERT INTO strking_db.t_recommend_video (video_url,title,from_author,add_admin_name)
+        VALUES (#{videoUrl},#{title},#{from_author},#{add_admin_name})
+    </insert>
+
+    <select id="findRecommendVideoList" resultType="com.kkai.entity.RecommendVideoVo">
+        SELECT * FROM strking_db.t_recommend_video r
+        WHERE 1 = 1
+        <if test="title != null and title != ''">
+            AND r.title LIKE CONCAT('%',#{title},'%')
+        </if>
+        ORDER BY r.send_time DESC
+        LIMIT #{limit} OFFSET #{offset};
+    </select>
+
+    <select id="countRecommendVideoList" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM strking_db.t_recommend_video r
+        WHERE 1 = 1
+        <if test="title != null and title != ''">
+            AND r.title LIKE CONCAT('%',#{title},'%')
+        </if>
+    </select>
+
+    <delete id="delArticleById">
+        DELETE FROM strking_db.t_recommend_video
+        WHERE sid = #{id}
+    </delete>
+</mapper>

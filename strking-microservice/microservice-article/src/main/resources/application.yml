@@ -1,0 +1,17 @@
+server:
+  port: 6666
+spring:
+  application:
+    name: strking-article
+  datasource:
+    url: jdbc:mysql://localhost:3306/strking_db?useUnicode=true&characterEncoding=UTF-8&ssl=false
+    username: root
+    passWord: root
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/

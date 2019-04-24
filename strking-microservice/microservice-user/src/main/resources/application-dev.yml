@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: microservice-provider-user
+  datasource:
+    url: jdbc:mysql://localhost:3306/strking_db?useUnicode=true&characterEncoding=UTF-8&ssl=false
+    username: root
+    passWord: root
+    driver-class-name: com.mysql.jdbc.Driver
+  mail:
+    host: smtp.126.com
+    username:
+    password:  #上面获取设置的授权码
+    default-encoding: UTF-8
+
+
+management:
+  security:
+    enabled: false
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+debug: true
+
+server:
+  port: 2222
+logging:
+  file: D:\Work\demo1\log\log.log
+  level: debug
+
+#注册服务:
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+
+
+#jwt配置
+jwt:
+  header:
+    Authorization
+  secret:
+    mySecret
+  expiration:
+    10
+  tokenHead:
+    Bearer
+  route:
+    authentication:
+      path:
+        auth/login
+      refresh:
+        auth/refresh
+      register:
+        "auth/register"
+
+zuul:
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
+
+

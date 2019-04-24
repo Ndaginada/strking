@@ -1,0 +1,16 @@
+server:
+  port: 4444
+spring:
+  application:
+    name: strking-file-uplode
+  http:
+    multipart:
+      max-file-size: 20Mb
+      max-request-size: 20Mb
+      location: D:\Study\lingshi
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/

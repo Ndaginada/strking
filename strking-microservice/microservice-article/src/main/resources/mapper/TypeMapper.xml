@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mapper.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kkai.mapper.TypeMapper">
+    <insert id="addType">
+        INSERT INTO strking_db.t_type(content)
+        VALUES (#{type_content})
+    </insert>
+    <select id="findTypeList" resultType="com.kkai.entity.TypeVo">
+        SELECT * FROM strking_db.t_type
+    </select>
+
+    <select id="getTypeContent" resultType="com.kkai.entity.TypeVo">
+        SELECT * FROM strking_db.t_type t
+        WHERE t.sid = #{type_id}
+    </select>
+    <select id="countUnderArticle" resultType="com.kkai.entity.CountUnderTypeArticleVo">
+        SELECT
+          t.sid                        type_id,
+          t.content                 AS type_content,
+          (SELECT count(a.sid)
+           FROM strking_db.t_article a
+           WHERE a.type_id = t.sid) AS under_num
+        FROM strking_db.t_type t
+        ORDER BY t.sid
+    </select>
+
+    <delete id="delType">
+        DELETE FROM strking_db.t_type
+        WHERE sid = #{id}
+    </delete>
+
+</mapper>

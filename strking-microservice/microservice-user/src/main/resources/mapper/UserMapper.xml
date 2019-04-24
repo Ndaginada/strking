@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mapper.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+
+    <select id="getUserById" resultType="com.example.demo.entity.User">
+        SELECT * FROM strking_db.t_web_user WHERE sid = #{id}
+    </select>
+
+    <select id="getUserByNameAndPassWord" resultType="com.example.demo.entity.User">
+         SELECT * FROM strking_db.t_web_user twu
+         WHERE twu.username = #{username}
+         AND twu.passWord = #{passWord}
+    </select>
+
+    <select id="findUserByUserName" resultType="com.example.demo.entity.User" parameterType="java.lang.String">
+        SELECT * FROM strking_db.t_web_user twu
+        WHERE twu.username = #{username}
+    </select>
+
+
+
+    <update id="updateUserInfo">
+        UPDATE strking_db.t_web_user AS u SET
+        <if test="email != null and email != ''">
+            u.email = #{email},
+        </if>
+        <if test="username != null and username != ''">
+            u.username = #{username},
+        </if>
+        <if test="introduce != null">
+            u.introduce = #{introduce},
+        </if>
+        <if test="icon != null and icon != ''">
+            u.icon = #{icon}
+        </if>
+        WHERE u.sid = #{sid}
+    </update>
+
+    <update id="updatePass">
+        UPDATE strking_db.t_web_user AS u SET
+        u.password = #{pass}
+        WHERE u.sid = #{id}
+    </update>
+
+    <select id="getUserList" resultType="com.example.demo.entity.User">
+        SELECT u.* FROM strking_db.t_web_user u
+          JOIN strking_db.t_user_role r ON u.sid = r.user_id
+        WHERE r.role_id = 1 AND u.status = 1
+        <if test="username != null and username != ''">
+            AND u.username LIKE CONCAT('%',#{username},'%')
+        </if>
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countUserList" resultType="long">
+        SELECT COUNT(*) FROM strking_db.t_web_user u
+          JOIN strking_db.t_user_role r ON u.sid = r.user_id
+        WHERE r.role_id = 1 AND u.status = 1
+        <if test="username != null and username != ''">
+            AND u.username LIKE CONCAT('%',#{username},'%')
+        </if>
+    </select>
+
+    <select id="getAdminList" resultType="com.example.demo.entity.User">
+        SELECT u.* FROM strking_db.t_web_user u
+        JOIN strking_db.t_user_role r ON u.sid = r.user_id
+        WHERE r.role_id = 2 AND u.status = 1
+        <if test="username != null and username != ''">
+            AND u.username LIKE CONCAT('%',#{username},'%')
+        </if>
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countAdminList" resultType="long">
+        SELECT COUNT(*) FROM strking_db.t_web_user u
+        JOIN strking_db.t_user_role r ON u.sid = r.user_id
+        WHERE r.role_id = 2 AND u.status = 1
+        <if test="username != null and username != ''">
+            AND u.username LIKE CONCAT('%',#{username},'%')
+        </if>
+    </select>
+
+    <update id="delUserById">
+        UPDATE strking_db.t_web_user u SET u.status = 0
+        WHERE u.sid = #{userId}
+    </update>
+
+    <delete id="delUserRoleById" >
+        DELETE FROM strking_db.t_user_role
+        WHERE user_id = #{userId}
+    </delete>
+
+    <insert id="addUser" parameterType="com.example.demo.entity.AddUserPara">
+        INSERT INTO strking_db.t_web_user(username, password, email, introduce)
+         VALUES (#{para.username},#{para.password},#{para.email},#{para.introduce})
+    </insert>
+
+    <select id="getUserByUserName" resultType="com.example.demo.entity.User">
+        SELECT * FROM strking_db.t_web_user
+        WHERE username = #{username}
+    </select>
+
+    <insert id="addUserRole">
+        INSERT INTO strking_db.t_user_role
+        VALUES (#{roleId},#{userId})
+    </insert>
+</mapper>

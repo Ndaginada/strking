@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mapper.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kkai.mapper.ArticleMapper">
+
+    <insert id="insertArticle">
+        INSERT INTO strking_db.t_article(title, title_img, author_id, content, type_id,send_time)
+        VALUES (#{title},#{titleImg} , #{authorId}, #{content}, #{typeId}, NOW())
+    </insert>
+    <insert id="insertCollect">
+        INSERT INTO strking_db.t_collect
+        VALUES (#{article_id},#{user_id})
+    </insert>
+
+    <select id="findArticleById" resultType="com.kkai.entity.ArticleVo">
+        SELECT * FROM strking_db.t_article a
+        WHERE a.sid = #{id}
+    </select>
+
+    <select id="findArticleList" resultType="com.kkai.entity.ArticleVo">
+        SELECT
+        a.*,
+        t.content                    AS type_content,
+        u.username                   AS author_name,
+        (SELECT
+        count(*)
+        FROM t_collect c
+        WHERE c.article_id = a.sid) AS collect_num
+        FROM strking_db.t_article a
+        LEFT JOIN strking_db.t_type t ON a.type_id = t.sid
+        LEFT JOIN strking_db.t_web_user u ON a.author_id = u.sid
+        WHERE 1 = 1
+        <if test="type_id != null">
+             AND a.type_id = #{type_id}
+        </if>
+        <if test="title != null and title != ''">
+             AND a.title LIKE CONCAT('%',#{title},'%')
+        </if>
+        ORDER BY a.status DESC ,a.send_time DESC
+        LIMIT #{limt} OFFSET #{offset};
+    </select>
+
+    <select id="countArticleList" resultType="java.lang.Long">
+        SELECT
+        COUNT(*)
+        FROM strking_db.t_article a
+        WHERE 1 = 1
+        <if test="type_id != null">
+            AND a.type_id = #{type_id}
+        </if>
+        <if test="title != null and title != ''">
+            AND a.title LIKE CONCAT('%',#{title},'%')
+        </if>
+    </select>
+    <select id="findCollectById" resultType="com.kkai.entity.CollectVo">
+        SELECT * FROM strking_db.t_collect
+        WHERE article_id = #{article_id} AND user_id = #{user_id}
+    </select>
+
+    <select id="myCollectList" resultType="com.kkai.entity.SimpleArticleListVo">
+        SELECT
+        a.sid as id,
+        a.title as title,
+        a.title_img as title_img
+        FROM strking_db.t_article a
+         JOIN strking_db.t_collect c ON a.sid = c.article_id
+        WHERE c.user_id = #{user_id}
+        LIMIT #{limit} OFFSET #{offset};
+    </select>
+    <select id="myArticleList" resultType="com.kkai.entity.SimpleArticleListVo">
+       SELECT
+        a.sid as id,
+        a.title as title,
+        a.title_img as title_img
+        FROM strking_db.t_article a
+        WHERE a.author_id = #{user_id}
+        LIMIT #{limit} OFFSET #{offset};
+    </select>
+
+    <update id="addArticleBrowse">
+       UPDATE strking_db.t_article SET browse_num =  browse_num+1
+       WHERE sid = #{id}
+    </update>
+    <update id="changeArticleStatus">
+        UPDATE strking_db.t_article SET status = #{status}
+        WHERE sid = #{id}
+    </update>
+
+    <delete id="delArticleById">
+        DELETE FROM strking_db.t_article WHERE sid = #{id}
+    </delete>
+    <delete id="delCollect">
+        DELETE FROM strking_db.t_collect
+        WHERE article_id = #{article_id} AND user_id = #{user_id}
+    </delete>
+</mapper>
