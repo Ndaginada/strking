@@ -7,3 +7,5 @@ dist
 node_modules
 .gitkeep
 converage
+cooking.conf.js
+

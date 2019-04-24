@@ -20,11 +20,20 @@
   "author": "kkai",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.17.1",
+    "babel-polyfill": "*",
+    "cooking-vue2": "*",
+    "element-ui": "^2.2.2",
+    "mint-ui": "^2.2.13",
     "vue": "^2.0.1",
-    "babel-polyfill": "*"
+    "vue-router": "latest",
+    "vue-template-compiler": "^2.5.10"
   },
   "devDependencies": {
+    "babel-polyfill": "*",
+    "mint-ui": "^2.2.13",
+    "vue-template-compiler": "^2.5.10",
     "cooking-vue2": "*",
-    "vue-template-compiler": "^2.5.10"
+    "vue": "^2.0.1"
   }
 }
